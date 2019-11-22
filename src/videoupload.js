@@ -3,7 +3,7 @@
  */
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import ImageUploadUI from './imageupload/imageuploadui';
+import VideoUploadUI from './imageupload/imageuploadui';
 import ImageUploadProgress from './imageupload/imageuploadprogress';
 import ImageUploadEditing from './imageupload/imageuploadediting';
 
@@ -32,7 +32,7 @@ export default class VideoUpload extends Plugin {
 	 * @inheritDoc
 	 */
 	static get requires() {
-		return [ ImageUploadEditing, ImageUploadUI, ImageUploadProgress ];
+		return [ ImageUploadEditing, VideoUploadUI, ImageUploadProgress ];
 	}
 }
 
