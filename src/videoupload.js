@@ -1,10 +1,5 @@
 /**
- * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
-/**
- * @module image/imageupload
+ * @module video/videoupload
  */
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
@@ -25,19 +20,19 @@ import ImageUploadEditing from './imageupload/imageuploadediting';
  *
  * @extends module:core/plugin~Plugin
  */
-export default class ImageUpload extends Plugin {
+export default class VideoUpload extends Plugin {
 	/**
 	 * @inheritDoc
 	 */
 	static get pluginName() {
-		return 'ImageUpload';
+		return 'VideoUpload';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	static get requires() {
-		return [ ImageUploadEditing, ImageUploadUI, ImageUploadProgress ];
+		return [ImageUploadEditing, ImageUploadUI, ImageUploadProgress];
 	}
 }
 
