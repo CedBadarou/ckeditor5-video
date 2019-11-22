@@ -58,10 +58,10 @@ export default class ImageUploadEditing extends Plugin {
 		const conversion = editor.conversion;
 		const fileRepository = editor.plugins.get( FileRepository );
 
-		const imageTypes = createImageTypeRegExp( editor.config.get( 'image.upload.types' ) );
+		const imageTypes = createImageTypeRegExp( editor.config.get( 'video.upload.types' ) );
 
 		// Setup schema to allow uploadId and uploadStatus for images.
-		schema.extend( 'image', {
+		schema.extend( 'video', {
 			allowAttributes: [ 'uploadId', 'uploadStatus' ]
 		} );
 
@@ -72,7 +72,7 @@ export default class ImageUploadEditing extends Plugin {
 		conversion.for( 'upcast' )
 			.attributeToAttribute( {
 				view: {
-					name: 'img',
+					name: 'video',
 					key: 'uploadId'
 				},
 				model: 'uploadId'
@@ -339,6 +339,6 @@ export function isHtmlIncluded( dataTransfer ) {
 
 function getImagesFromChangeItem( editor, item ) {
 	return Array.from( editor.model.createRangeOn( item ) )
-		.filter( value => value.item.is( 'image' ) )
+		.filter( value => value.item.is( 'video' ) )
 		.map( value => value.item );
 }

@@ -33,16 +33,16 @@ export default class VideoUploadUI extends Plugin {
 		editor.ui.componentFactory.add( 'videoUpload', locale => {
 			const view = new FileDialogButtonView( locale );
 			const command = editor.commands.get( 'videoUpload' );
-			const imageTypes = editor.config.get( 'image.upload.types' );
+			const imageTypes = editor.config.get( 'video.upload.types' );
 			const imageTypesRegExp = createImageTypeRegExp( imageTypes );
 
 			view.set( {
-				acceptedType: imageTypes.map( type => `image/${ type }` ).join( ',' ),
+				acceptedType: imageTypes.map( type => `video/${ type }` ).join( ',' ),
 				allowMultipleFiles: true
 			} );
 
 			view.buttonView.set( {
-				label: t( 'Insert image' ),
+				label: t( 'Insert Video' ),
 				icon: imageIcon,
 				tooltip: true
 			} );
