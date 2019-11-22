@@ -32,7 +32,7 @@ export default class VideoUpload extends Plugin {
 	 * @inheritDoc
 	 */
 	static get requires() {
-		return [ImageUploadEditing, ImageUploadUI, ImageUploadProgress];
+		return [ ImageUploadEditing, ImageUploadUI, ImageUploadProgress ];
 	}
 }
 

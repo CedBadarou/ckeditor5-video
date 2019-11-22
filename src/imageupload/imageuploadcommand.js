@@ -44,7 +44,7 @@ export default class ImageUploadCommand extends Command {
 	 * @inheritDoc
 	 */
 	refresh() {
-		this.isEnabled = isImageAllowed(this.editor.model);
+		this.isEnabled = isImageAllowed( this.editor.model );
 	}
 
 	/**
@@ -54,19 +54,19 @@ export default class ImageUploadCommand extends Command {
 	 * @param {Object} options Options for the executed command.
 	 * @param {File|Array.<File>} options.file The image file or an array of image files to upload.
 	 */
-	execute(options) {
+	execute( options ) {
 		const editor = this.editor;
 		const model = editor.model;
 
-		const fileRepository = editor.plugins.get(FileRepository);
+		const fileRepository = editor.plugins.get( FileRepository );
 
-		model.change(writer => {
-			const filesToUpload = Array.isArray(options.file) ? options.file : [options.file];
+		model.change( writer => {
+			const filesToUpload = Array.isArray( options.file ) ? options.file : [ options.file ];
 
-			for (const file of filesToUpload) {
-				uploadImage(writer, model, fileRepository, file);
+			for ( const file of filesToUpload ) {
+				uploadImage( writer, model, fileRepository, file );
 			}
-		});
+		} );
 	}
 }
 
@@ -75,13 +75,13 @@ export default class ImageUploadCommand extends Command {
 // @param {module:engine/model/writer~writer} writer
 // @param {module:engine/model/model~Model} model
 // @param {File} file
-function uploadImage(writer, model, fileRepository, file) {
-	const loader = fileRepository.createLoader(file);
+function uploadImage( writer, model, fileRepository, file ) {
+	const loader = fileRepository.createLoader( file );
 
 	// Do not throw when upload adapter is not set. FileRepository will log an error anyway.
-	if (!loader) {
+	if ( !loader ) {
 		return;
 	}
 
-	insertImage(writer, model, { uploadId: loader.id });
+	insertImage( writer, model, { uploadId: loader.id } );
 }
