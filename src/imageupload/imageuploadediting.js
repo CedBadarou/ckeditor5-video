@@ -16,7 +16,7 @@ import env from '@ckeditor/ckeditor5-utils/src/env';
 
 import ImageUploadCommand from '../../src/imageupload/imageuploadcommand';
 import { fetchLocalImage, isLocalImage } from '../../src/imageupload/utils';
-import { createImageTypeRegExp } from './utils';
+import { createVideoTypeRegExp } from './utils';
 
 /**
  * The editing part of the image upload feature. It registers the `'imageUpload'` command.
@@ -58,7 +58,7 @@ export default class ImageUploadEditing extends Plugin {
 		const conversion = editor.conversion;
 		const fileRepository = editor.plugins.get( FileRepository );
 
-		const imageTypes = createImageTypeRegExp( editor.config.get( 'video.upload.types' ) );
+		const imageTypes = createVideoTypeRegExp( editor.config.get( 'video.upload.types' ) );
 
 		// Setup schema to allow uploadId and uploadStatus for images.
 		schema.register( 'video', {

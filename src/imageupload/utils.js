@@ -19,11 +19,11 @@
  * @param {Array.<String>} types
  * @returns {RegExp}
  */
-export function createImageTypeRegExp( types ) {
+export function createVideoTypeRegExp( types ) {
 	// Sanitize the MIME type name which may include: "+", "-" or ".".
 	const regExpSafeNames = types.map( type => type.replace( '+', '\\+' ) );
 
-	return new RegExp( `^image\\/(${ regExpSafeNames.join( '|' ) })$` );
+	return new RegExp( `^video\\/(${ regExpSafeNames.join( '|' ) })$` );
 }
 
 /**

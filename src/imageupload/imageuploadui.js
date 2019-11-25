@@ -10,7 +10,7 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import FileDialogButtonView from '@ckeditor/ckeditor5-upload/src/ui/filedialogbuttonview';
 import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/image.svg';
-import { createImageTypeRegExp } from './utils';
+import { createVideoTypeRegExp } from './utils';
 
 /**
  * The image upload button plugin.
@@ -34,7 +34,7 @@ export default class VideoUploadUI extends Plugin {
 			const view = new FileDialogButtonView( locale );
 			const command = editor.commands.get( 'videoUpload' );
 			const imageTypes = editor.config.get( 'video.upload.types' );
-			const imageTypesRegExp = createImageTypeRegExp( imageTypes );
+			const imageTypesRegExp = createVideoTypeRegExp( imageTypes );
 
 			view.set( {
 				acceptedType: imageTypes.map( type => `video/${ type }` ).join( ',' ),
