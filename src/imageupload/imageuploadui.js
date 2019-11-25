@@ -9,7 +9,7 @@
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import FileDialogButtonView from '@ckeditor/ckeditor5-upload/src/ui/filedialogbuttonview';
-import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/image.svg';
+import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/media.svg';
 import { createVideoTypeRegExp } from './utils';
 
 /**
