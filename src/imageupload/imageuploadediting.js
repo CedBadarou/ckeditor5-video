@@ -408,6 +408,8 @@ function getImagesFromChangeItem( editor, item ) {
 }
 export function createImageViewElement( writer ) {
 	const emptyElement = writer.createEmptyElement( 'video' );
+	writer.setCustomProperty( 'width', '100%', emptyElement );
+	writer.setCustomProperty( 'controls', true, emptyElement );
 	const figure = writer.createContainerElement( 'figure', { class: 'video' } );
 
 	writer.insert( writer.createPositionAt( figure, 0 ), emptyElement );
