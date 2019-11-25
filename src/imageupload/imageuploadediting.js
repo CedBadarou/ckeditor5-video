@@ -62,7 +62,10 @@ export default class ImageUploadEditing extends Plugin {
 
 		// Setup schema to allow uploadId and uploadStatus for images.
 		schema.register( 'video', {
-			allowAttributes: [ 'uploadId', 'uploadStatus' ]
+			isObject: true,
+			isBlock: true,
+			allowWhere: '$block',
+			allowAttributes: [ 'alt', 'src', 'srcset', 'uploadId', 'uploadStatus' ]
 		} );
 
 		// Register imageUpload command.
