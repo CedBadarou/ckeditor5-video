@@ -30,12 +30,12 @@ export function viewFigureToModel() {
 
 	function converter( evt, data, conversionApi ) {
 		// Do not convert if this is not an "image figure".
-		if ( !conversionApi.consumable.test( data.viewItem, { name: true, classes: 'image' } ) ) {
+		if ( !conversionApi.consumable.test( data.viewItem, { name: true, classes: 'video' } ) ) {
 			return;
 		}
 
 		// Find an image element inside the figure element.
-		const viewImage = Array.from( data.viewItem.getChildren() ).find( viewChild => viewChild.is( 'img' ) );
+		const viewImage = Array.from( data.viewItem.getChildren() ).find( viewChild => viewChild.is( 'video' ) );
 
 		// Do not convert if image element is absent, is missing src attribute or was already converted.
 		if ( !viewImage || !viewImage.hasAttribute( 'src' ) || !conversionApi.consumable.test( viewImage, { name: true } ) ) {
@@ -71,7 +71,7 @@ export function viewFigureToModel() {
  */
 export function srcsetAttributeConverter() {
 	return dispatcher => {
-		dispatcher.on( 'attribute:srcset:image', converter );
+		dispatcher.on( 'attribute:srcset:video', converter );
 	};
 
 	function converter( evt, data, conversionApi ) {
@@ -112,7 +112,7 @@ export function srcsetAttributeConverter() {
 
 export function modelToViewAttributeConverter( attributeKey ) {
 	return dispatcher => {
-		dispatcher.on( `attribute:${ attributeKey }:image`, converter );
+		dispatcher.on( `attribute:${ attributeKey }:video`, converter );
 	};
 
 	function converter( evt, data, conversionApi ) {

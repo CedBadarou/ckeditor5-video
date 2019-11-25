@@ -18,6 +18,11 @@ import ImageUploadCommand from '../../src/imageupload/imageuploadcommand';
 import { fetchLocalImage, isLocalImage } from '../../src/imageupload/utils';
 import { createVideoTypeRegExp } from './utils';
 import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
+import {
+	viewFigureToModel,
+	modelToViewAttributeConverter,
+	srcsetAttributeConverter
+} from '../image/converters';
 
 /**
  * The editing part of the image upload feature. It registers the `'imageUpload'` command.
@@ -79,6 +84,50 @@ export default class ImageUploadEditing extends Plugin {
 			model: 'image',
 			view: ( modelElement, viewWriter ) => toImageWidget( createImageViewElement( viewWriter ), viewWriter, t( 'image widget' ) )
 		} );
+
+		conversion.for( 'downcast' )
+			.add( modelToViewAttributeConverter( 'src' ) )
+			.add( modelToViewAttributeConverter( 'alt' ) )
+			.add( srcsetAttributeConverter() );
+
+		conversion.for( 'upcast' )
+			.elementToElement( {
+				view: {
+					name: 'img',
+					attributes: {
+						src: true
+					}
+				},
+				model: ( viewImage, modelWriter ) => modelWriter.createElement( 'image', { src: viewImage.getAttribute( 'src' ) } )
+			} )
+			.attributeToAttribute( {
+				view: {
+					name: 'img',
+					key: 'alt'
+				},
+				model: 'alt'
+			} )
+			.attributeToAttribute( {
+				view: {
+					name: 'img',
+					key: 'srcset'
+				},
+				model: {
+					key: 'srcset',
+					value: viewImage => {
+						const value = {
+							data: viewImage.getAttribute( 'srcset' )
+						};
+
+						if ( viewImage.hasAttribute( 'width' ) ) {
+							value.width = viewImage.getAttribute( 'width' );
+						}
+
+						return value;
+					}
+				}
+			} )
+			.add( viewFigureToModel() );
 		// Register imageUpload command.
 		editor.commands.add( 'videoUpload', new ImageUploadCommand( editor ) );
 
