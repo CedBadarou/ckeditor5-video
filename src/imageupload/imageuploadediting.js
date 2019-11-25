@@ -61,7 +61,7 @@ export default class ImageUploadEditing extends Plugin {
 		const imageTypes = createImageTypeRegExp( editor.config.get( 'video.upload.types' ) );
 
 		// Setup schema to allow uploadId and uploadStatus for images.
-		schema.extend( 'video', {
+		schema.register( 'video', {
 			allowAttributes: [ 'uploadId', 'uploadStatus' ]
 		} );
 
