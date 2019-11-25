@@ -17,6 +17,7 @@ import env from '@ckeditor/ckeditor5-utils/src/env';
 import ImageUploadCommand from '../../src/imageupload/imageuploadcommand';
 import { fetchLocalImage, isLocalImage } from '../../src/imageupload/utils';
 import { createVideoTypeRegExp } from './utils';
+import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
 
 /**
  * The editing part of the image upload feature. It registers the `'imageUpload'` command.
@@ -55,6 +56,7 @@ export default class ImageUploadEditing extends Plugin {
 		const editor = this.editor;
 		const doc = editor.model.document;
 		const schema = editor.model.schema;
+		const t = editor.t;
 		const conversion = editor.conversion;
 		const fileRepository = editor.plugins.get( FileRepository );
 
@@ -73,6 +75,10 @@ export default class ImageUploadEditing extends Plugin {
 			view: ( modelElement, viewWriter ) => createImageViewElement( viewWriter )
 		} );
 
+		conversion.for( 'editingDowncast' ).elementToElement( {
+			model: 'image',
+			view: ( modelElement, viewWriter ) => toImageWidget( createImageViewElement( viewWriter ), viewWriter, t( 'image widget' ) )
+		} );
 		// Register imageUpload command.
 		editor.commands.add( 'videoUpload', new ImageUploadCommand( editor ) );
 
@@ -357,4 +363,17 @@ export function createImageViewElement( writer ) {
 	writer.insert( writer.createPositionAt( figure, 0 ), emptyElement );
 
 	return figure;
+}
+
+export function toImageWidget( viewElement, writer, label ) {
+	writer.setCustomProperty( 'video', true, viewElement );
+
+	return toWidget( viewElement, writer, { label: labelCreator } );
+
+	function labelCreator() {
+		const imgElement = viewElement.getChild( 0 );
+		const altText = imgElement.getAttribute( 'alt' );
+
+		return altText ? `${ altText } ${ label }` : label;
+	}
 }
