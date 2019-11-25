@@ -68,6 +68,11 @@ export default class ImageUploadEditing extends Plugin {
 			allowAttributes: [ 'alt', 'src', 'srcset', 'uploadId', 'uploadStatus' ]
 		} );
 
+		conversion.for( 'dataDowncast' ).elementToElement( {
+			model: 'image',
+			view: ( modelElement, viewWriter ) => createImageViewElement( viewWriter )
+		} );
+
 		// Register imageUpload command.
 		editor.commands.add( 'videoUpload', new ImageUploadCommand( editor ) );
 
@@ -344,4 +349,12 @@ function getImagesFromChangeItem( editor, item ) {
 	return Array.from( editor.model.createRangeOn( item ) )
 		.filter( value => value.item.is( 'video' ) )
 		.map( value => value.item );
+}
+export function createImageViewElement( writer ) {
+	const emptyElement = writer.createEmptyElement( 'video' );
+	const figure = writer.createContainerElement( 'figure', { class: 'video' } );
+
+	writer.insert( writer.createPositionAt( figure, 0 ), emptyElement );
+
+	return figure;
 }
