@@ -76,13 +76,13 @@ export default class ImageUploadEditing extends Plugin {
 		} );
 
 		conversion.for( 'dataDowncast' ).elementToElement( {
-			model: 'image',
+			model: 'video',
 			view: ( modelElement, viewWriter ) => createImageViewElement( viewWriter )
 		} );
 
 		conversion.for( 'editingDowncast' ).elementToElement( {
-			model: 'image',
-			view: ( modelElement, viewWriter ) => toImageWidget( createImageViewElement( viewWriter ), viewWriter, t( 'image widget' ) )
+			model: 'video',
+			view: ( modelElement, viewWriter ) => toImageWidget( createImageViewElement( viewWriter ), viewWriter, t( 'video widget' ) )
 		} );
 
 		conversion.for( 'downcast' )
@@ -93,23 +93,23 @@ export default class ImageUploadEditing extends Plugin {
 		conversion.for( 'upcast' )
 			.elementToElement( {
 				view: {
-					name: 'img',
+					name: 'video',
 					attributes: {
 						src: true
 					}
 				},
-				model: ( viewImage, modelWriter ) => modelWriter.createElement( 'image', { src: viewImage.getAttribute( 'src' ) } )
+				model: ( viewImage, modelWriter ) => modelWriter.createElement( 'video', { src: viewImage.getAttribute( 'src' ) } )
 			} )
 			.attributeToAttribute( {
 				view: {
-					name: 'img',
+					name: 'video',
 					key: 'alt'
 				},
 				model: 'alt'
 			} )
 			.attributeToAttribute( {
 				view: {
-					name: 'img',
+					name: 'video',
 					key: 'srcset'
 				},
 				model: {
