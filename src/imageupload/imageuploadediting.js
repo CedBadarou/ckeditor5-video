@@ -98,7 +98,8 @@ export default class ImageUploadEditing extends Plugin {
 						src: true
 					}
 				},
-				model: ( viewImage, modelWriter ) => modelWriter.createElement( 'video', { src: viewImage.getAttribute( 'src' ) } )
+				model: ( viewImage, modelWriter ) => modelWriter.createElement( 'video',
+					{ src: viewImage.getAttribute( 'src' ), width: '100%', controls: true } )
 			} )
 			.attributeToAttribute( {
 				view: {
