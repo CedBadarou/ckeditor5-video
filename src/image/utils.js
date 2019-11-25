@@ -20,7 +20,7 @@ import { findOptimalInsertionPosition, isWidget, toWidget } from '@ckeditor/cked
  * @returns {module:engine/view/element~Element}
  */
 export function toImageWidget( viewElement, writer, label ) {
-	writer.setCustomProperty( 'image', true, viewElement );
+	writer.setCustomProperty( 'video', true, viewElement );
 
 	return toWidget( viewElement, writer, { label: labelCreator } );
 
@@ -39,7 +39,7 @@ export function toImageWidget( viewElement, writer, label ) {
  * @returns {Boolean}
  */
 export function isImageWidget( viewElement ) {
-	return !!viewElement.getCustomProperty( 'image' ) && isWidget( viewElement );
+	return !!viewElement.getCustomProperty( 'video' ) && isWidget( viewElement );
 }
 
 /**
@@ -65,7 +65,7 @@ export function getSelectedImageWidget( selection ) {
  * @returns {Boolean}
  */
 export function isImage( modelElement ) {
-	return !!modelElement && modelElement.is( 'image' );
+	return !!modelElement && modelElement.is( 'video' );
 }
 
 /**
@@ -80,7 +80,7 @@ export function isImage( modelElement ) {
  * @param {Object} [attributes={}] Attributes of inserted image
  */
 export function insertImage( writer, model, attributes = {} ) {
-	const imageElement = writer.createElement( 'image', attributes );
+	const imageElement = writer.createElement( 'video', attributes );
 
 	const insertAtSelection = findOptimalInsertionPosition( model.document.selection, model );
 
@@ -113,7 +113,7 @@ export function isImageAllowed( model ) {
 function isImageAllowedInParent( selection, schema, model ) {
 	const parent = getInsertImageParent( selection, model );
 
-	return schema.checkChild( parent, 'image' );
+	return schema.checkChild( parent, 'video' );
 }
 
 // Check if selection is on object.
@@ -127,7 +127,7 @@ function checkSelectionOnObject( selection, schema ) {
 
 // Checks if selection is placed in other image (ie. in caption).
 function isInOtherImage( selection ) {
-	return [ ...selection.focus.getAncestors() ].every( ancestor => !ancestor.is( 'image' ) );
+	return [ ...selection.focus.getAncestors() ].every( ancestor => !ancestor.is( 'video' ) );
 }
 
 // Returns a node that will be used to insert image with `model.insertContent` to check if image can be placed there.

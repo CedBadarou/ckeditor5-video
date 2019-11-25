@@ -47,7 +47,7 @@ export default class ImageUploadProgress extends Plugin {
 		const editor = this.editor;
 
 		// Upload status change - update image's view according to that status.
-		editor.editing.downcastDispatcher.on( 'attribute:uploadStatus:image', ( ...args ) => this.uploadStatusChange( ...args ) );
+		editor.editing.downcastDispatcher.on( 'attribute:uploadStatus:video', ( ...args ) => this.uploadStatusChange( ...args ) );
 	}
 
 	/**
